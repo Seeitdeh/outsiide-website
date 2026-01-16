@@ -10,77 +10,99 @@
   <style>
     :root{
       --bg:#050505;
-      --bgImage:url("assets/outsiide-bg.jpg")
+      --bgImage:url("assets/outsiide-bg.jpg");
+
       --text:#f2f2f2;
       --muted:rgba(242,242,242,.72);
-      --card:rgba(255,255,255,.06);
-      --border:rgba(255,255,255,.12);
-      --input:rgba(255,255,255,.08);
-      --inputBorder:rgba(255,255,255,.16);
-      --good:rgba(140,255,180,.9);
-      --bad:rgba(255,140,140,.9);
+
+      --card:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.14);
+
+      --input:rgba(255,255,255,.10);
+      --inputBorder:rgba(255,255,255,.18);
+
+      --good:rgba(140,255,180,.92);
+      --bad:rgba(255,140,140,.92);
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       min-height:100vh;
-      background:
-        Linear-gradien(
-          rgba(0,0,0,.55),
-          rgba(0,0,0,.65)
-        ), 
-        var(--bgImage) center / cover no-repeat,
-        var(--bg);
-      color: var(--text);
+      color:var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 28px;
+      padding:28px;
+
+      /* Background image + dark overlay */
+      background:
+        linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.70)),
+        var(--bgImage) center / cover no-repeat,
+        var(--bg);
+
+      /* Optional polish: subtle slow zoom */
+      animation: slowZoom 40s ease-in-out infinite alternate;
     }
+
+    @keyframes slowZoom {
+      from { background-size: auto, 100% auto, auto; }
+      to   { background-size: auto, 108% auto, auto; }
+    }
+
     .wrap{
-      width: min(980px, 100%);
+      width:min(980px, 100%);
       display:flex;
       justify-content:center;
     }
+
     .card{
-      width: min(760px, 100%);
-      padding: 34px 26px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: var(--card);
-      backdrop-filter: blur(10px);
+      width:min(780px, 100%);
+      padding:34px 26px;
+      border:1px solid var(--border);
+      border-radius:22px;
+      background:var(--card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       text-align:center;
+      box-shadow: 0 26px 60px rgba(0,0,0,.45);
     }
+
     .logo{
-      width: min(340px, 70vw);
+      width:min(360px, 75vw);
       height:auto;
       display:block;
-      margin: 0 auto 14px;
+      margin:0 auto 14px;
       filter: drop-shadow(0 18px 26px rgba(0,0,0,.55));
     }
+
     h1{
-      margin: 10px 0 8px;
+      margin:10px 0 8px;
       font-size: clamp(22px, 3.2vw, 32px);
-      letter-spacing: .08em;
+      letter-spacing:.10em;
     }
+
     p{
-      margin: 0 auto;
-      max-width: 58ch;
+      margin:0 auto;
+      max-width: 60ch;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
+
     .pill{
       display:inline-block;
-      margin-top: 18px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: .06em;
+      margin-top:18px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color: rgba(242,242,242,.78);
+      font-size:13px;
+      letter-spacing:.06em;
       text-transform: uppercase;
+      background: rgba(0,0,0,.18);
     }
 
     /* Email capture panel */
@@ -90,27 +112,32 @@
       padding: 16px;
       border: 1px solid var(--border);
       border-radius: 18px;
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.28);
     }
+
     .captureTitle{
       margin: 0 0 6px;
       font-size: 14px;
       letter-spacing: .06em;
       text-transform: uppercase;
-      color: rgba(242,242,242,.78);
+      color: rgba(242,242,242,.85);
     }
+
     .captureSub{
       margin: 0 0 12px;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
     }
+
     form{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       justify-content:center;
+      align-items:center;
     }
+
     input[type="email"]{
       flex: 1 1 260px;
       min-width: 220px;
@@ -121,21 +148,27 @@
       color: var(--text);
       outline: none;
     }
-    input[type="email"]::placeholder{ color: rgba(242,242,242,.45); }
+    input[type="email"]::placeholder{
+      color: rgba(242,242,242,.50);
+    }
+
     button{
-      padding: 12px 14px;
+      padding: 12px 16px;
       border-radius: 999px;
       border: 0;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       background: #fff;
       color: #000;
-      flex: 0 0 auto;
+      transition: transform 120ms ease, opacity 120ms ease;
     }
+    button:hover{ transform: translateY(-1px); }
     button:disabled{
-      opacity: .6;
+      opacity: .60;
       cursor: not-allowed;
+      transform: none;
     }
+
     .msg{
       margin-top: 10px;
       font-size: 13px;
@@ -148,13 +181,20 @@
     .footer{
       margin-top: 18px;
       font-size: 12px;
-      color: rgba(242,242,242,.45);
+      color: rgba(242,242,242,.55);
     }
-    .footer a{
-      color: rgba(242,242,242,.70);
-      text-decoration:none;
+
+    /* Mobile spacing tweaks */
+    @media (max-width: 480px){
+      .card{ padding: 28px 18px; }
+      .capture{ padding: 14px; }
     }
-    .footer a:hover{ text-decoration:underline; }
+
+    /* Optional: Respect reduced motion settings */
+    @media (prefers-reduced-motion: reduce){
+      body{ animation: none; }
+      button:hover{ transform: none; }
+    }
   </style>
 </head>
 
@@ -172,7 +212,6 @@
 
       <div class="pill">Ottawa • Canada</div>
 
-      <!-- Email capture -->
       <section class="capture" aria-label="Email capture">
         <div class="captureTitle">Get launch updates</div>
         <div class="captureSub">
@@ -203,8 +242,8 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // 1) Create a free form at Formspree
-    // 2) Replace this URL with your Formspree endpoint
+    // Replace with your Formspree endpoint:
+    // Example: https://formspree.io/f/abcdwxyz
     const FORMSPREE_URL = "https://formspree.io/f/mzdddzgj";
 
     const form = document.getElementById("notifyForm");
@@ -213,6 +252,7 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
       msg.textContent = "";
       msg.className = "msg";
       btn.disabled = true;
@@ -228,7 +268,10 @@
       try {
         const res = await fetch(FORMSPREE_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
           body: JSON.stringify({
             email,
             source: "outsiide.ca coming soon page",
